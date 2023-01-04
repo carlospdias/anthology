@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="metalhead.video">
+  <resultMap id="VideoResult" type="Video">
+    <id     property="id"      column="ID"       javaType="integer"  />
+    <result property="name"    column="NAME"     javaType="string"/>
+    <result property="data"    column="DATA"     jdbcType="BLOB"/>   
+  </resultMap>
+  
+  <select id="selectAllVideos" resultMap="VideoResult">
+  <![CDATA[
+    SELECT
+      VIDEOS.ID,
+      VIDEOS.NAME,
+      VIDEOS.DATA
+    FROM
+      VIDEOS VIDEOS
+  ]]>    
+  </select>
+  
+  <select id="selectAllNames" resultType="String" >
+  <![CDATA[
+    SELECT
+      VIDEOS.NAME
+    FROM
+      VIDEOS VIDEOS
+  ]]>    
+  </select>
+  <insert id="insert" parameterType="Video">
+    <selectKey keyProperty="id" resultType="int" order="BEFORE">
+       SELECT NEXTVAL('SQ_VIDEO');
+    </selectKey>
+    <![CDATA[
+      INSERT INTO (ID, NAME, DATA) VALUES(#{id}, #{name} #{data})
+    ]]>
+  </insert>
+  
+</mapper>

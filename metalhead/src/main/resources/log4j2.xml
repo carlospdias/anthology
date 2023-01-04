@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="WARN" monitorInterval="30" strict="true"
+           xmlns="http://logging.apache.org/log4j/2.0/config"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://logging.apache.org/log4j/2.0/config 
+           https://raw.githubusercontent.com/apache/logging-log4j2/master/log4j-core/src/main/resources/Log4j-config.xsd">
+
+  <Properties>
+    <Property name="LOG_PATTERN">%d{yyyy-MM-dd'T'HH:mm:ss.SSSZ} %p %m%n</Property>
+  </Properties>
+
+  <Appenders>
+
+    <!-- Console Appender -->
+    <Console name="Console" target="SYSTEM_OUT" follow="true">
+      <PatternLayout pattern="${LOG_PATTERN}" />
+    </Console>
+  </Appenders>
+
+  <Loggers>
+
+    <Logger name="com.cpdias.metalhead" additivity="false" level="debug">
+      <AppenderRef ref="Console" />
+    </Logger>
+
+    <Logger name="org.framework" additivity="false" level="info">
+      <AppenderRef ref="Console" />
+    </Logger>
+
+    <Root level="warn">
+      <AppenderRef ref="Console" />
+    </Root>
+
+  </Loggers>
+
+</Configuration>
